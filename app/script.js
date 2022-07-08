@@ -1,6 +1,17 @@
 const socket = io('https://lit-fortress-44612.herokuapp.com/');//https://lit-fortress-44612.herokuapp.com/
+nick=null
+while (nick==null ){
+nick=prompt("nick:")//document.getElementById('nick').value
+}
+while(!(nick.length<=15)){
+    nick=prompt("nick:")
+}
 
-nick=document.getElementById('nick').value
+socket.emit('user',nick)
+
+socket.on('user',msg =>{
+    console.log("msg")
+})
 
 socket.on('message',mesg=>{
     if(mesg["nick"]!=nick){
@@ -13,7 +24,7 @@ socket.on('message',mesg=>{
 
 document.querySelector('button').onclick = ()=>{
 
-    nick=document.getElementById('nick').value
+    /*nick=document.getElementById('nick').value*/
     text = document.querySelector('input').value;
     // + ":" + today.getSeconds()
     /*today = new Date();
@@ -21,7 +32,7 @@ document.querySelector('button').onclick = ()=>{
 
     
 
-    if(nick!="" && text!=""){
+    if(text!=""){
 
         const div = document.createElement('div');
 
