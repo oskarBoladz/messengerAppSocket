@@ -7,10 +7,10 @@ while(!(nick.length<=15)){
     nick=prompt("nick:")
 }
 
-socket.emit('user',nick)
+socket.emit('users',nick)
 
-socket.on('user',msg =>{
-    console.log("msg")
+socket.on('users',data =>{
+    console.log(data)
 })
 
 socket.on('message',mesg=>{

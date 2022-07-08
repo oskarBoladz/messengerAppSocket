@@ -11,9 +11,8 @@ io.on('connection',(socket)=>{
         console.log(message)
         io.emit('message',message)
     })
-    socket.on('user',(message)=>{
-        console.log(message)
-        io.emit('message',message)
+    socket.on('users',(data)=>{
+        io.sockets.emit('users',data)
     })
 })
 
