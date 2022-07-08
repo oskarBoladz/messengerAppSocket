@@ -1,5 +1,6 @@
 const http = require('http').createServer();
 
+
 const io = require('socket.io')(http,{
     cors:{orygin:"*"}
 })
@@ -12,4 +13,4 @@ io.on('connection',(socket)=>{
     })
 })
 
-http.listen(8080,()=>console.log("slucham"))
+http.listen(process.env.PORT || 8080,()=>console.log("slucham"))

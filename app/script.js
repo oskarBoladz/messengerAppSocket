@@ -1,4 +1,4 @@
-const socket = io('ws://localhost:8080');
+const socket = io('https://lit-fortress-44612.herokuapp.com/');
 
 nick=document.getElementById('nick').value
 
