@@ -1,3 +1,5 @@
+
+
 const socket = io('https://lit-fortress-44612.herokuapp.com/');//https://lit-fortress-44612.herokuapp.com/
 nick=null
 while (nick==null ){
@@ -6,24 +8,45 @@ nick=prompt("nick:")//document.getElementById('nick').value
 while(!(nick.length<=20)){
     nick=prompt("nick:")
 }
-console.log(nick)
-socket.emit('users',nick)
+
+socket.emit('users',{nick:nick,std:""})
+
+usersall=[]
+usersall.push(nick)
+//console.log(usersall.includes(nick))
+dusr = document.createElement('div');
+dusr.className="oneUser"
+dusr.id=nick
+dusr.innerHTML=nick
+document.getElementById('allUs').appendChild(dusr)
 
 socket.on('users',data =>{
-    if(data!=nick){
-        console.log(data)
 
-        div = document.createElement('div');
-        div.className="oneUser"
-        document.getElementById('allUser').appendChild(div)
-    }
-    
+        console.log(data["nick"])
+        if(data["nick"]!=nick && usersall.includes(data["nick"])==false && data["std"]!="del"){
+        dusr = document.createElement('div');
+        dusr.className="oneUser"
+        dusr.id=data["nick"]
+        dusr.innerHTML=data["nick"]
+        document.getElementById('allUs').appendChild(dusr)
+
+
+            usersall.push(data["nick"])
+            socket.emit('users',{nick:nick,std:""});
+            console.log(usersall)
+        }
+        else if(usersall.includes(data["nick"]) && data["std"]=="del"){
+            a=data["nick"]
+            console.log(a)
+            document.getElementById(a).remove();
+        }
+
 })
 
 addEventListener('beforeunload', () => { 
-    socket.emit('users',nick)
+    socket.emit('users',{nick:nick,std:"del"})
 });
-
+/*document.getElementById("my-element").remove();*/ 
 socket.on('message',mesg=>{
     if(mesg["nick"]!=nick){
     div = document.createElement('div');
