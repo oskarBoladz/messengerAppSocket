@@ -29,7 +29,7 @@ document.querySelector('button').onclick = ()=>{
         div.innerHTML="["+nick+"]: "+text;
         document.getElementById('allMessagesUwU').appendChild(div)
         
-        socket.emit('message',{message:"["+nick+"] "+text,nick:nick})
+        socket.emit('message',{message:"["+nick+"] "+text , nick:nick})
 
         document.getElementById('mesage').value=''
         
