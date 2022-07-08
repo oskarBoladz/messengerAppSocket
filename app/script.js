@@ -3,15 +3,26 @@ nick=null
 while (nick==null ){
 nick=prompt("nick:")//document.getElementById('nick').value
 }
-while(!(nick.length<=15)){
+while(!(nick.length<=20)){
     nick=prompt("nick:")
 }
-
+console.log(nick)
 socket.emit('users',nick)
 
 socket.on('users',data =>{
-    console.log(data)
+    if(data!=nick){
+        console.log(data)
+
+        div = document.createElement('div');
+        div.className="oneUser"
+        document.getElementById('allUser').appendChild(div)
+    }
+    
 })
+
+addEventListener('beforeunload', () => { 
+    socket.emit('users',nick)
+});
 
 socket.on('message',mesg=>{
     if(mesg["nick"]!=nick){
