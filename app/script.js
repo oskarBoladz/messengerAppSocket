@@ -1,7 +1,15 @@
-
-
 const socket = io('https://lit-fortress-44612.herokuapp.com/');//https://lit-fortress-44612.herokuapp.com/
 nick=null
+room=null
+
+gr=true
+while(gr){
+    room=prompt("room: ")
+    if(!isNaN(room) && room.length==4){
+        gr=false
+    }
+}
+
 while (nick==null ){
 nick=prompt("nick:")//document.getElementById('nick').value
 }
